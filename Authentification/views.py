@@ -8,9 +8,32 @@ from logs.models import Log
 from django.core.files.base import ContentFile
 from django.contrib.auth.models import User
 from profiles.models import Profile
+from django.contrib.auth.forms import AuthenticationForm
 
 def login_view(request):
-    return render(request, 'login.html', {})
+    # instantiate the standard Django login form
+    form = AuthenticationForm(request, data=request.POST or None)
+
+    # add Bootstrap classes so it looks nice without extra filters
+    form.fields['username'].widget.attrs.update({
+        'class': 'form-control',
+        'placeholder': 'Username',
+    })
+    form.fields['password'].widget.attrs.update({
+        'class': 'form-control',
+        'placeholder': 'Password',
+    })
+
+    # if they submitted the username/password form (not the AJAX face-login)
+    if request.method == 'POST' and 'username' in request.POST:
+        if form.is_valid():
+            login(request, form.get_user())
+            return redirect('home')
+
+    # render the login page with both the form and face-login JS
+    return render(request, 'login.html', {
+        'form': form,
+    })
 
 def logout_view(request):
     logout(request)
