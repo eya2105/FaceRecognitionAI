@@ -66,8 +66,8 @@ def classify_face(img):
             matches = fr.compare_faces(faces_encoded, face_encoding)
 
             # Find the known face with the closest encoding to the current face
-            face_distances = fr.face_distance(faces_encoded, face_encoding)
-            best_match_index = np.argmin(face_distances)
+            face_distances = fr.face_distance(faces_encoded, face_encoding)#calculates the face distance (how close the match is)
+            best_match_index = np.argmin(face_distances)#It picks the closest match
 
             # If the closest known face is a match for the current face, label the face with the known name
             if matches[best_match_index]:
