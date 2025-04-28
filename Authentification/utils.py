@@ -2,7 +2,7 @@ import face_recognition as fr
 import numpy as np
 from profiles.models import Profile
 
-
+# faster interaction between front-end and back-end without full page reloads.
 def is_ajax(request):
   return request.headers.get('x-requested-with') == 'XMLHttpRequest'
 
