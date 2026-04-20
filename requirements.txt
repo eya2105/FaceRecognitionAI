@@ -1,0 +1,5 @@
+Django>=4.0
+face-recognition
+numpy
+Pillow
+python-dotenv
