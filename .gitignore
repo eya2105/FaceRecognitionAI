@@ -33,3 +33,5 @@ Thumbs.db
 
 # Ignore environment variable files
 .env
+
+*.sqlite3
